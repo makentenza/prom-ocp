@@ -18,7 +18,7 @@ spec:
     spec:
       nodeSelector: {"region":"infra"}
       containers:
-      - image: grafana/grafana:4.1.1
+      - image: grafana/grafana:latest
         name: grafana-core
         imagePullPolicy: IfNotPresent
         # env:
@@ -328,8 +328,6 @@ spec:
       - name: prometheus
         image: prom/prometheus:latest
         args:
-          - '-storage.local.retention=24h'
-          - '-storage.local.memory-chunks=500000'
           - '-config.file=/etc/prometheus/prometheus.yml'
         ports:
         - name: webui
@@ -360,12 +358,12 @@ spec:
     metadata:
       labels:
         app: kube-state-metrics
-        version: "v0.3.0"
+        version: "v1.1.0"
     spec:
       nodeSelector: {"region":"infra"}
       containers:
       - name: kube-state-metrics
-        image: gcr.io/google_containers/kube-state-metrics:v0.3.0
+        image: gcr.io/google_containers/kube-state-metrics:v1.1.0
         ports:
         - containerPort: 8080
 ---
